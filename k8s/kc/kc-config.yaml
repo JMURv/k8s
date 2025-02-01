@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-config
+data:
+  KC_DB: "postgres"
+  KC_DB_URL: "jdbc:postgresql://pg-master:5432/keycloak?targetServerType=master"
+  KC_DB_URL_REPLICA: "jdbc:postgresql://pg-slave:5432/keycloak?targetServerType=preferSlave"
+
+  KC_HOSTNAME: "localhost"
+  KC_HTTP_ENABLED: "true"
+  KC_HEALTH_ENABLED: "true"
+  KC_METRICS_ENABLED: "true"
+
+  KC_CACHE: "ispn"
+  KC_CACHE_STACK: "kubernetes"
+  KC_CACHE_INFINISPAN_HOST: "infinispan-cluster"
+  KC_CACHE_INFINISPAN_PORT: "11222"
+  KC_CACHE_INFINISPAN_JGROUPS_TCPPING_INITIAL_HOSTS: "infinispan-0.infinispan-cluster,infinispan-1.infinispan-cluster"
+  KC_CACHE_INFINISPAN_JGROUPS_TCPPING_PORT: "7800"
+  JAVA_OPTS_APPEND: "-Djgroups.dns.query=keycloak-headless"

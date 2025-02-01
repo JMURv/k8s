@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pg-master
+spec:
+  serviceName: pg-master
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+      role: master
+  template:
+    metadata:
+      labels:
+        app: postgres
+        role: master
+    spec:
+      securityContext:
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+      initContainers:
+        - name: copy-config
+          image: busybox
+          command: [ "/bin/sh", "-c" ]
+          args:
+            - |
+              cp /etc/postgresql/pg_hba.conf /var/lib/postgresql/data/pg_hba.conf;
+              cp /etc/postgresql/postgresql.conf /var/lib/postgresql/data/postgresql.conf;
+              chown 999:999 /var/lib/postgresql/data/pg_hba.conf /var/lib/postgresql/data/postgresql.conf;
+              chmod 600 /var/lib/postgresql/data/pg_hba.conf /var/lib/postgresql/data/postgresql.conf;
+          volumeMounts:
+            - name: pg-data
+              mountPath: /var/lib/postgresql/data
+            - name: pg-config-volume
+              mountPath: /etc/postgresql
+      containers:
+        - name: pg-master
+          image: postgres:15
+          envFrom:
+            - configMapRef:
+                name: master-config
+          volumeMounts:
+          - name: pg-data
+            mountPath: /var/lib/postgresql/data
+          - name: pg-config-volume
+            mountPath: /etc/postgresql
+      volumes:
+      - name: pg-data
+        persistentVolumeClaim:
+          claimName: pg-master-pvc
+      - name: pg-config-volume
+        configMap:
+          name: master-config

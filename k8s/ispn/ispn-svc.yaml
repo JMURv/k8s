@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: infinispan-cluster
+spec:
+  ports:
+    - port: 11222
+      name: infinispan
+    - port: 7800
+      name: jgroups
+  clusterIP: None
+  selector:
+    app: infinispan

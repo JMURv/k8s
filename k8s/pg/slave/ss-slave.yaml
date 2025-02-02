@@ -30,7 +30,7 @@ spec:
             mountPath: /var/lib/postgresql/data
         command:
           - bash
-          - "-c"
+          - -c
           - |
             # Extract replica name from the pod's hostname (e.g., pg-slave-0)
             REPLICA_NAME=$(hostname | sed 's/-/_/g')

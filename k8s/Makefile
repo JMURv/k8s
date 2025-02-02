@@ -1,9 +1,9 @@
 master-run:
-	kubectl apply -f .pg/master/config-master.yaml
-	kubectl apply -f .pg/master/pv-master.yaml
-	kubectl apply -f .pg/master/pvc-master.yaml
-	kubectl apply -f .pg/master/svc-master.yaml
-	kubectl apply -f .pg/master/ss-master.yaml
+	kubectl apply -f pg/master/config-master.yaml
+	kubectl apply -f pg/master/pvc-master.yaml
+	kubectl apply -f pg/master/svc-master.yaml
+	kubectl apply -f pg/master/ss-master.yaml
+#kubectl apply -f pg/master/pv-master.yaml
 
 master-d:
 	kubectl delete statefulset pg-master
@@ -14,11 +14,11 @@ master-dpv:
 	kubectl delete pv pg-master-pv
 
 slave-run:
-	kubectl apply -f .pg/slave/config-slave.yaml
-	kubectl apply -f .pg/slave/pv-slave.yaml
-	kubectl apply -f .pg/slave/pvc-slave.yaml
-	kubectl apply -f .pg/slave/svc-slave.yaml
-	kubectl apply -f .pg/slave/ss-slave.yaml
+	kubectl apply -f pg/slave/config-slave.yaml
+	kubectl apply -f pg/slave/pvc-slave.yaml
+	kubectl apply -f pg/slave/svc-slave.yaml
+	kubectl apply -f pg/slave/ss-slave.yaml
+	kubectl apply -f pg/slave/pv-slave.yaml
 
 slave-d:
 	kubectl delete statefulset pg-slave

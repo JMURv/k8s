@@ -8,6 +8,8 @@ spec:
       name: infinispan
     - port: 7800
       name: jgroups
+    - port: 57800
+      name: jmx
   clusterIP: None
   selector:
     app: infinispan

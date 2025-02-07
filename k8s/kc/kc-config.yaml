@@ -7,6 +7,7 @@ data:
   KC_DB_URL: "jdbc:postgresql://pg-master:5432/keycloak?targetServerType=master"
   KC_DB_URL_REPLICA: "jdbc:postgresql://pg-slave:5432/keycloak?targetServerType=preferSlave"
 
+  KC_FEATURES: "hostname:v2"
   KC_HOSTNAME: "localhost"
   KC_HTTP_ENABLED: "true"
   KC_HEALTH_ENABLED: "true"
@@ -16,6 +17,5 @@ data:
   KC_CACHE_STACK: "kubernetes"
   KC_CACHE_INFINISPAN_HOST: "infinispan-cluster"
   KC_CACHE_INFINISPAN_PORT: "11222"
-  KC_CACHE_INFINISPAN_JGROUPS_TCPPING_INITIAL_HOSTS: "infinispan-0.infinispan-cluster,infinispan-1.infinispan-cluster"
-  KC_CACHE_INFINISPAN_JGROUPS_TCPPING_PORT: "7800"
-  JAVA_OPTS_APPEND: "-Djgroups.dns.query=keycloak-headless"
+  KC_CACHE_REMOTE_TIMEOUT: "10000"
+  JAVA_OPTS_APPEND: "-Djgroups.dns.query=infinispan-cluster"

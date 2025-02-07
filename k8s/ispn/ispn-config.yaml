@@ -3,10 +3,11 @@ kind: ConfigMap
 metadata:
   name: ispn-config
 data:
-  INFINISPAN_CLUSTER_NAME: "infinispan-cluster"
-  INFINISPAN_HTTP_PORT: "11222"
+  USER: "admin"
+  PASS: "superstrongpassword"
 
-  INFINISPAN_JGROUPS_DISCOVERY_PROTOCOL: "TCPPING"
-  INFINISPAN_JGROUPS_TCPPING_INITIAL_HOSTS: "infinispan-0.infinispan-cluster,infinispan-1.infinispan-cluster"
-  INFINISPAN_JGROUPS_TCPPING_PORT: "7800"
+  INFINISPAN_HTTP_PORT: "11222"
+  INFINISPAN_CLUSTER_NAME: "infinispan-cluster"
+
+  INFINISPAN_JGROUPS_DISCOVERY_PROTOCOL: "DNS_PING"
   INFINISPAN_JGROUPS_DNS_QUERY: "infinispan-cluster.default.svc.cluster.local"

@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: master-config
 data:
-  POSTGRES_DB: "postgres"
+  POSTGRES_DB: "keycloak"
   POSTGRES_USER: "postgres"
-  POSTGRES_PASSWORD: "password"
+  POSTGRES_PASSWORD: "superstrongpassword"
   POSTGRES_HOST: "pg-master"
   POSTGRES_PORT: "5432"
   PGDATA: "/var/lib/postgresql/data"

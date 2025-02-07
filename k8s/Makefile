@@ -33,10 +33,10 @@ kc-run:
 	kubectl apply -f ./kc/kc-svc.yaml
 	kubectl apply -f ./kc/kc-ss.yaml
 
-kc-del:
+kc-d:
 	kubectl delete statefulset keycloak
 
-kc-del-pv:
+kc-dpv:
 	kubectl delete pv kc-pv
 	kubectl delete pvc kc-pvc
 
@@ -45,9 +45,9 @@ ispn-run:
 	kubectl apply -f ./ispn/ispn-svc.yaml
 	kubectl apply -f ./ispn/ispn-ss.yaml
 
-ispn-del:
+ispn-d:
 	kubectl delete statefulset infinispan
 
-ispn-del-pv:
-	kubectl delete pv kc-pv
-	kubectl delete pvc kc-pvc
+ispn-dpv:
+	kubectl delete pv -l app=infinispan
+#kubectl delete pvc ispn-pvc

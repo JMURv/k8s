@@ -10,4 +10,71 @@ data:
   INFINISPAN_CLUSTER_NAME: "infinispan-cluster"
 
   INFINISPAN_JGROUPS_DISCOVERY_PROTOCOL: "DNS_PING"
-  INFINISPAN_JGROUPS_DNS_QUERY: "infinispan-cluster.default.svc.cluster.local"
+  INFINISPAN_JGROUPS_DNS_QUERY: "infinispan-cluster"
+
+  infinispan.xml: |
+    <infinispan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="urn:infinispan:config:15.1 https://infinispan.org/schemas/infinispan-config-15.1.xsd
+                                    urn:infinispan:server:15.1 https://infinispan.org/schemas/infinispan-server-15.1.xsd"
+                xmlns="urn:infinispan:config:15.1"
+                xmlns:server="urn:infinispan:server:15.1">
+        
+        <cache-container name="default" statistics="true">
+            <transport cluster="${infinispan.cluster.name:cluster}" stack="${infinispan.cluster.stack:tcp}" node-name="${infinispan.node.name:}"/>
+            <security>
+                <authorization/>
+            </security>
+        </cache-container>
+
+        <replicated-cache name="sessions">
+            <transaction mode="BATCH"/>
+            <expiration lifespan="1800000"/>
+            <encoding media-type="application/x-protostream"/>
+        </replicated-cache>
+
+        <replicated-cache name="authenticationSessions">
+            <transaction mode="BATCH"/>
+            <expiration lifespan="600000"/>
+            <encoding media-type="application/x-protostream"/>
+        </replicated-cache>
+
+        <replicated-cache name="work">
+            <transaction mode="BATCH"/>
+            <encoding media-type="application/x-protostream"/>
+        </replicated-cache>
+
+        <replicated-cache name="actionTokens">
+            <transaction mode="BATCH"/>
+            <expiration lifespan="300000"/>
+            <encoding media-type="application/x-protostream"/>
+        </replicated-cache>
+
+        <replicated-cache name="loginFailures">
+            <transaction mode="BATCH"/>
+            <expiration lifespan="900000"/>
+            <encoding media-type="application/x-protostream"/>
+        </replicated-cache>
+
+        <server xmlns="urn:infinispan:server:15.1">
+            <interfaces>
+                <interface name="public">
+                    <inet-address value="${infinispan.bind.address:127.0.0.1}"/>
+                </interface>
+            </interfaces>
+
+            <socket-bindings default-interface="public" port-offset="${infinispan.socket.binding.port-offset:0}">
+                <socket-binding name="default" port="${infinispan.bind.port:11222}"/>
+            </socket-bindings>
+
+            <security>
+                <security-realms>
+                    <security-realm name="default">
+                        <properties-realm/>
+                    </security-realm>
+                </security-realms>
+            </security>
+
+            <endpoints socket-binding="default" security-realm="default" />
+        </server>
+
+    </infinispan>

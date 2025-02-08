@@ -15,22 +15,27 @@ spec:
     spec:
       containers:
         - name: keycloak
-          image: keycloak/keycloak:26.1
+          image: keycloak/keycloak:26.1.1
           imagePullPolicy: IfNotPresent
           command:
             - sh
             - -c
             - |
-              /opt/keycloak/bin/kc.sh build
-              /opt/keycloak/bin/kc.sh start --optimized
+              #/opt/keycloak/bin/kc.sh build
+              #/opt/keycloak/bin/kc.sh start --optimized
+              /opt/keycloak/bin/kc.sh start
           envFrom:
             - configMapRef:
                 name: keycloak-config
             - secretRef:
                 name: keycloak-db-secret
           ports:
-            - containerPort: 8080
-              name: http
+            - name: http
+              containerPort: 8080
+            - name: https
+              containerPort: 8443
+            - name: cli
+              containerPort: 9000
           volumeMounts:
             - name: kc-data
               mountPath: /opt/keycloak/data
@@ -45,7 +50,7 @@ spec:
             timeoutSeconds: 3
             httpGet:
               path: /health/live
-              port: 8080
+              port: 9000
 
           readinessProbe:
             initialDelaySeconds: 10
@@ -53,14 +58,14 @@ spec:
             timeoutSeconds: 3
             httpGet:
               path: /health/ready
-              port: 8080
+              port: 9000
 
           startupProbe:
             failureThreshold: 15 # 15*10 = 2.5m max wait time
             periodSeconds: 10
             httpGet:
               path: /health/ready
-              port: 8080
+              port: 9000
 
           resources:
             requests:
@@ -74,7 +79,7 @@ spec:
     - metadata:
         name: kc-data
       spec:
-        accessModes: [ReadWriteOnce]
+        accessModes: [ ReadWriteOnce ]
         resources:
           requests:
             storage: 5Gi

@@ -6,7 +6,7 @@ master-run:
 #kubectl apply -f pg/master/pv-master.yaml
 
 master-d:
-	kubectl delete statefulset pg-master
+	kubectl delete sts pg-master
 	kubectl delete svc pg-master
 
 master-dpv:
@@ -34,7 +34,8 @@ kc-run:
 	kubectl apply -f ./kc/kc-ss.yaml
 
 kc-d:
-	kubectl delete statefulset keycloak
+	kubectl delete sts keycloak
+	kubectl delete svc keycloak
 
 kc-dpv:
 	kubectl delete pv kc-pv
@@ -47,6 +48,7 @@ ispn-run:
 
 ispn-d:
 	kubectl delete statefulset infinispan
+	kubectl delete svc infinispan-cluster
 
 ispn-dpv:
 	kubectl delete pv -l app=infinispan

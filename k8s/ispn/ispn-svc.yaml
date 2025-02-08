@@ -4,12 +4,15 @@ metadata:
   name: infinispan-cluster
 spec:
   ports:
-    - port: 11222
-      name: infinispan
-    - port: 7800
-      name: jgroups
-    - port: 57800
-      name: jmx
+    - name: ispn
+      port: 11222
+      targetPort: ispn
+    - name: jgroups
+      port: 7800
+      targetPort: jgroups
+    - name: jmx
+      port: 57800
+      targetPort: jmx
   clusterIP: None
   selector:
     app: infinispan

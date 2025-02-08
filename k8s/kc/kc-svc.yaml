@@ -7,12 +7,15 @@ spec:
     - name: http
       port: 8080
       targetPort: http
+      nodePort: 30080
     - name: https
       port: 8443
       targetPort: https
+      nodePort: 30443
     - name: cli
       port: 9000
       targetPort: cli
-  type: ClusterIP
+      nodePort: 30900
+  type: NodePort
   selector:
     app: keycloak

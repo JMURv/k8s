@@ -1,3 +1,3 @@
 .idea
-k8s/pg/zalando
+k8s/pg/zalando/postgres-operator/
 *~

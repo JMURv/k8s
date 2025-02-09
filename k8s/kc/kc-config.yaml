@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: keycloak-config
+  name: kc-cfg
 data:
   KC_DB: "postgres"
   KC_DB_URL: "jdbc:postgresql://pg-master:5432/keycloak?targetServerType=master"

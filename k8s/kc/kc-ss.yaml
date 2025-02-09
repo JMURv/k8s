@@ -21,14 +21,13 @@ spec:
             - sh
             - -c
             - |
-              #/opt/keycloak/bin/kc.sh build
-              #/opt/keycloak/bin/kc.sh start --optimized
-              /opt/keycloak/bin/kc.sh start
+              /opt/keycloak/bin/kc.sh build
+              /opt/keycloak/bin/kc.sh start --optimized
           envFrom:
             - configMapRef:
-                name: keycloak-config
+                name: kc-cfg
             - secretRef:
-                name: keycloak-db-secret
+                name: kc-secret
           ports:
             - name: http
               containerPort: 8080

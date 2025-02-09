@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-svc
+spec:
+  selector:
+    app: minio
+  ports:
+    - name: srv
+      port: 9000
+      targetPort: srv
+      nodePort: 30900
+    - name: cli
+      port: 9001
+      targetPort: cli
+      nodePort: 30901
+  type: NodePort

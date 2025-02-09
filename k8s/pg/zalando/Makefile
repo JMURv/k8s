@@ -12,10 +12,10 @@ srv-running:
 	kubectl get pod -l name=postgres-operator
 
 srv-p:
-	kubectl get pods -l application=spilo -L spilo-role
+	kubectl get pods -l app=pg -L role
 
 srv-s:
-	kubectl get svc -l application=spilo -L spilo-role
+	kubectl get svc -l app=pg -L role
 
 ui:
 	kubectl apply -f cli/

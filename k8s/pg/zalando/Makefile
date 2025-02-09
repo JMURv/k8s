@@ -1,9 +1,9 @@
 srv:
-	kubectl apply -f server/conf/operatorconfiguration.crd.yaml # configuration
-	kubectl apply -f server/conf/postgresql-operator-default-configuration.yaml # configuration
-	kubectl apply -f server/operator-service-account-rbac.yaml # identity and permissions
-	kubectl apply -f server/postgres-operator.yaml # deployment
-	kubectl apply -f server/api-service.yaml # operator API to be used by UI
+	kubectl apply -f server/conf/operatorconfiguration.crd.yaml
+	kubectl apply -f server/conf/pg-conf.yaml
+	kubectl apply -f server/operator-service-account-rbac.yaml
+	kubectl apply -f server/postgres-operator.yaml
+	kubectl apply -f server/api-service.yaml
 
 srv-run:
 	kubectl apply -f server/postgres-cluster.yaml

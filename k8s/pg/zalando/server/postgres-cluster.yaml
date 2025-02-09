@@ -10,6 +10,7 @@ spec:
   teamId: "acid"
   numberOfInstances: 2
 
+  enableLogicalBackup: true
   enableMasterLoadBalancer: true
   enableReplicaLoadBalancer: true
   enableConnectionPooler: true # enable/disable connection pooler deployment

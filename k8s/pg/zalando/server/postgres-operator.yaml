@@ -35,7 +35,7 @@ spec:
           allowPrivilegeEscalation: false
         env:
         - name: POSTGRES_OPERATOR_CONFIGURATION_OBJECT
-          value: postgresql-operator-default-configuration
+          value: pg-conf
         # Define an ID to isolate controllers from each other
         # - name: CONTROLLER_ID
         #   value: "second-operator"
